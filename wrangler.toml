@@ -2,5 +2,7 @@ name = "event-crm"
 compatibility_date = "2026-09-14"
 pages_build_output_dir = "./dist"
 
-# D1 is bound in the Cloudflare Pages dashboard.
-# Binding variable name: DB
+[[d1_databases]]
+binding = "DB"
+database_name = "event-crm-db"
+database_id = "26a254e3-2cbc-417f-ba8a-c4ab8a724501"
