@@ -1,7 +1,6 @@
-name = "booking-crm"
-compatibility_date = "2026-09-01"
-pages_build_output_dir = "dist"
+name = "event-crm"
+compatibility_date = "2026-09-14"
+pages_build_output_dir = "./dist"
 
-# After creating the D1 database in Cloudflare, add the binding in
-# Cloudflare Pages > Settings > Functions > D1 database bindings:
-# Variable name: DB
+# D1 is bound in the Cloudflare Pages dashboard.
+# Binding variable name: DB
