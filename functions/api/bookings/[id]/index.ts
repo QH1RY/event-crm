@@ -7,3 +7,14 @@ export const onRequestPut: PagesFunction<Env> = async ({env,request,params}) => 
   if(Array.isArray(b.checklist)) for(let n=0;n<b.checklist.length;n++){const i=b.checklist[n];await env.DB.prepare('INSERT INTO checklist_items (id,booking_id,title,completed,due_date,owner,sort_order) VALUES (?,?,?,?,?,?,?)').bind(i.id,id,i.title,i.completed?1:0,i.due_date||null,i.owner||null,n).run()}
   return json(b)
 }
+export const onRequestDelete: PagesFunction<Env> = async ({env,params}) => {
+  const id=String(params.id)
+  await env.DB.prepare('UPDATE bookings SET archived_at=CURRENT_TIMESTAMP, updated_at=CURRENT_TIMESTAMP WHERE id=?').bind(id).run()
+  return json({ok:true,archived:true,id})
+}
+export const onRequestPatch: PagesFunction<Env> = async ({env,request,params}) => {
+  const id=String(params.id); const body:any=await request.json().catch(()=>({}))
+  if(!body.restore) return json({error:'Unsupported operation'},400)
+  await env.DB.prepare('UPDATE bookings SET archived_at=NULL, updated_at=CURRENT_TIMESTAMP WHERE id=?').bind(id).run()
+  return json({ok:true,archived:false,id})
+}
