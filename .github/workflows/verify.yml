@@ -19,3 +19,7 @@ jobs:
       - name: Test Outlook connector with mock responses
         shell: pwsh
         run: ./tests/outlook.test.ps1
+
+      - name: Test PA CRM connector
+        shell: pwsh
+        run: ./tests/pa-crm.test.ps1
