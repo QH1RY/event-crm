@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.functions-check/
+.wrangler/
+.env
+.env.*
+!.env.example
+*.token

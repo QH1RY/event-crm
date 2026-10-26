@@ -80,6 +80,17 @@ async function initialise(db: D1Database) {
     await db.prepare('ALTER TABLE bookings ADD COLUMN archived_at TEXT').run()
   }
 
+  // Idempotent setup for installations that use /api/setup instead of migrations.
+  const names = new Set((columns.results || []).map(c => c.name))
+  for (const [name, definition] of [
+    ['version', 'INTEGER NOT NULL DEFAULT 1'],
+    ['write_token', 'TEXT'],
+    ['outlook_event_id', 'TEXT'],
+    ['outlook_event_url', 'TEXT'],
+  ]) {
+    if (!names.has(name)) await db.prepare('ALTER TABLE bookings ADD COLUMN '+name+' '+definition).run()
+  }
+
   const checks = await db.prepare(`
     SELECT name FROM sqlite_master
     WHERE type = 'table' AND name IN ('bookings','checklist_items','ai_clients','audit_log')
