@@ -10,7 +10,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy:pages": "wrangler pages deploy dist --project-name=event-crm"
+    "deploy:pages": "wrangler pages deploy dist --project-name=event-crm",
+    "test": "node --test tests/*.test.mjs",
+    "test:outlook": "pwsh -NoProfile -File tests/outlook.test.ps1"
   },
   "dependencies": {
     "react": "18.3.1",

@@ -30,7 +30,7 @@ npm run dev
 2. Build command: `npm run build`
 3. Output directory: `dist`
 4. Create a D1 database, for example `event-crm-db`.
-5. Run both SQL files in `migrations/` against the D1 database, in numerical order.
+5. Run the SQL files in `migrations/` against the D1 database, in numerical order (including 0003_concurrent_updates.sql).
 6. In the Pages project add a D1 binding called `DB` pointing to that database for Preview and Production.
 7. Redeploy.
 8. Protect the site with Cloudflare Access so only authorised team email addresses can open it.
@@ -63,3 +63,6 @@ The CRM includes a controlled AI API under `/api/ai`. It is designed so ChatGPT 
 - Claude: read=1, create=1, update=1, archive=0, delete=0
 
 Never commit raw AI tokens to GitHub. Store them only in the relevant connector/MCP secret configuration.
+
+## PA integration
+See [PA integration and activation](docs/PA-INTEGRATION.md) for version-checked task updates, Outlook setup, verification and remaining activation steps.

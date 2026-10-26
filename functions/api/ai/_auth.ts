@@ -36,6 +36,7 @@ export async function audit(env:Env, input:{booking_id?:string|null;actor_name:s
 export async function getBooking(env:Env,id:string){
   const b=await env.DB.prepare('SELECT * FROM bookings WHERE id=? AND archived_at IS NULL').bind(id).first<any>()
   if(!b) return null
+  delete b.write_token
   const {results:items}=await env.DB.prepare('SELECT * FROM checklist_items WHERE booking_id=? ORDER BY sort_order,id').bind(id).all<any>()
   return {...b,checklist:items.map(i=>({...i,completed:!!i.completed}))}
 }
