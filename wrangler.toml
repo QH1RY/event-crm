@@ -2,6 +2,10 @@ name = "event-crm"
 compatibility_date = "2026-09-14"
 pages_build_output_dir = "./dist"
 
+[vars]
+ACCESS_TEAM_DOMAIN = "quirkyhire-762.cloudflareaccess.com"
+ACCESS_AUD = "6a25841fa6d906d67a79fe63fbc98ee730d9f4d325c075f86e2ec66dc10e988d"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "event-crm-db"
