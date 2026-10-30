@@ -63,7 +63,8 @@ def extract_candidate(message, mailbox):
     if not form:
         if re.search(r'(unsubscribe|newsletter)', text, re.I) or re.search(r'(noreply|no-reply|newsletter)', sender.get('address', ''), re.I): return None
         if not re.search(r'(enquir|inquir|quot|hire|photo\s?booth|drap|event)', subject, re.I): return None
-        if not re.search(r'(looking for|interested|require|\bneed\b|availability|how much|could you|would like)', text, re.I): return None
+        # A supplier asking whether YOU are interested is not a client's buying intent.
+        if not re.search(r"(looking for|\b(?:i am|we are|i'm|we're)\s+interested\b|require|\bneed\b|availability|how much|could you|would like)", text, re.I): return None
     contact = (fields.get('EMAIL') if form else sender.get('address', '')) or ''
     if not EMAIL.fullmatch(contact.strip()): return None
     recipients = [x.get('emailAddress', {}).get('address', '').lower() for x in message.get('toRecipients', [])]

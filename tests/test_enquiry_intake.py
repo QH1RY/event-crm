@@ -42,6 +42,21 @@ class IntakeTests(unittest.TestCase):
                'body': {'contentType': 'Text', 'content': 'I am currently on annual leave. If your enquiry is urgent and requires assistance contact the office. Do you need to print this email?'}}
         self.assertIsNone(mod.extract_candidate(msg, 'info@quirky-hire.co.uk'))
 
+    def test_supplier_if_you_are_interested_pitch_is_not_a_new_enquiry(self):
+        mod = self.parser()
+        msg = {'id': 'supplier1', 'subject': 'Extra revenue line for Quirky Hire - AI sticker prints',
+               'from': {'emailAddress': {'name': 'Example Supplier', 'address': 'supplier@example.test'}},
+               'body': {'contentType': 'Text', 'content': 'We make desktop photo booths with revenue-share consumables. Please contact us if you are interested to know more.'}}
+        self.assertIsNone(mod.extract_candidate(msg, 'info@quirky-hire.co.uk'))
+
+    def test_first_person_client_interest_still_creates_candidate(self):
+        mod = self.parser()
+        for text in ['I am interested in hiring a photo booth.', 'We are interested in draping for our launch.']:
+            msg = {'id': 'interest1', 'subject': 'Photo booth hire enquiry',
+                   'from': {'emailAddress': {'address': 'client@example.test'}},
+                   'body': {'contentType': 'Text', 'content': text}}
+            self.assertIsNotNone(mod.extract_candidate(msg, 'info@quirky-hire.co.uk'))
+
     def test_client_text_cannot_override_permissions_or_stage(self):
         mod = self.parser()
         msg = {'id': 'm3', 'conversationId': 'c3', 'subject': 'Photo booth hire enquiry',
