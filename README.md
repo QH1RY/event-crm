@@ -64,5 +64,8 @@ The CRM includes a controlled AI API under `/api/ai`. It is designed so ChatGPT 
 
 Never commit raw AI tokens to GitHub. Store them only in the relevant connector/MCP secret configuration.
 
+## Enquiries
+Pre-booking enquiry tracking (pipeline, follow-ups, controlled API under `/api/ai/enquiries`). Run `migrations/0004_enquiries.sql` after 0003 as part of the owner's deployment. See [Enquiry CRM](docs/ENQUIRY-CRM.md).
+
 ## PA integration
 See [PA integration and activation](docs/PA-INTEGRATION.md) for version-checked task updates, Outlook setup, verification and remaining activation steps.
