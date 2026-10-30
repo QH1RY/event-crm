@@ -6,3 +6,6 @@ dist/
 .env.*
 !.env.example
 *.token
+scripts/state/
+**/__pycache__/
+*.pyc

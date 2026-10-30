@@ -31,9 +31,9 @@ export async function verifyAccess(request:Request,env:Env,fetchKeys:typeof fetc
 }
 export const onRequest: PagesFunction<Env> = async ({request,env,next}) => {
   const path=new URL(request.url).pathname
-  if (path==='/api/setup' || path==='/api/setup/' || path==='/api/bookings' || path.startsWith('/api/bookings/')) {
-    if (!env.ACCESS_TEAM_DOMAIN || !env.ACCESS_AUD) return reject('Cloudflare Access must be configured before booking data can be opened.',503)
-    if (!await verifyAccess(request,env)) return reject('Sign in through Cloudflare Access to open booking data.')
+  if (path==='/api/setup' || path==='/api/setup/' || path==='/api/bookings' || path.startsWith('/api/bookings/') || path==='/api/enquiries' || path.startsWith('/api/enquiries/')) {
+    if (!env.ACCESS_TEAM_DOMAIN || !env.ACCESS_AUD) return reject('Cloudflare Access must be configured before booking and enquiry data can be opened.',503)
+    if (!await verifyAccess(request,env)) return reject('Sign in through Cloudflare Access to open booking and enquiry data.')
   }
   return next()
 }

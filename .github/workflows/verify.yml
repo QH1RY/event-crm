@@ -14,6 +14,8 @@ jobs:
       - run: npm install --ignore-scripts
       - run: npm run build
       - run: node --test tests/*.test.mjs
+      - name: Test conservative inbox enquiry parser
+        run: python tests/test_enquiry_intake.py
       - name: Check Pages Functions bundle
         run: npx wrangler pages functions build functions --outdir=.functions-check
       - name: Test Outlook connector with mock responses
